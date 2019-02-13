@@ -2,7 +2,8 @@ EXPORTACIÓN DE DATOS, PROFUNDIZACIÓN EN EL PIPELINE
 
 EXPORTAR DATOS EN VARIOS FORMATOS
 
-El cmdlet export-CSV permite exportar la salida de una comando hacia un archivo\de texto, en formato separado por comas. Un ejemplo:
+El cmdlet export-CSV permite exportar la salida de una comando hacia un archivo
+de texto, en formato separado por comas. Un ejemplo:
 
 get-process | export-csv procesos.csv
 
@@ -84,6 +85,11 @@ Las dos versiones son funcionalmente equivalentes, pero el comando out-file
 recibe parámetros para cambiar el ancho de línea, y para evitar la sobre-
 escritura de un archivo existente.
 
+Para leer un archivo de texto plano como cadenas de texto, se emplea el cmdlet
+Get-Content (con alias cat ó type):
+
+Get-Content procesos.txt
+
 Si se desea enviar la salida de un comando a la impresora, se emplea el cmdlet
 out-printer:
 
@@ -156,9 +162,124 @@ Get-Process | gm
 
 PASO DE PARÁMETROS EN EL PIPELINE
 
+En un pipeline del tipo:
 
+Comando_A | Comando_B
 
-EJERCICIOS CON EL PIPELINE
+...los parámetros se pueden pasar de dos maneras:
+
+** Por valor (ByValue): En este caso, Powershell analiza el tipo de salida que
+da el Comando_A, y determina qué parámetro del Comando_B puede recibir esta
+salida.
+
+Ejemplo: Analizar el comando
+
+Get-Process | Stop-Process
+
+En este caso, Get-Process produce objetos tipo Process. Examinando la ayuda
+de Stop-Process, se encuentra el siguiente parámetro:
+
+-InputObject <Process[]>
+     Specifies the process objects to stop. Enter a variable that contains the 
+     objects, or type a command or expression that gets the objects.
+        
+     Required?                    true
+     Position?                    0
+     Default value                None
+     Accept pipeline input?       True (ByValue)
+     Accept wildcard characters?  false
+
+Como se ve, este parámetro puede recibir valores del pipeline, empleando el
+método ByValue. Por esta razón, el comando funciona.
+
+Si se intenta conectar con el pipeline dos comandos que no tienen salida y
+parámetros compatibles, se produce un error. También puede darse el caso de que
+el paso de datos se dé por el parámetro incorrecto. Por ejemplo, suponga que
+el archivo computadores.txt contiene los nombres de varios computadores, y se
+desea desplegar la lista de servicios de cada uno de estos computadores. Se
+podría usar el comando:
+
+Get-Content computadores.txt | get-service
+
+Este comando produce un error, porque el parámetro requerido (ComputerName)
+no acepta entrada por el pipeline por el método ByValue.
+
+El comando se puede ejecutar entonces empleando paréntesis:
+
+get-service -computername (get-content computadores.txt)
+
+** Por nombre de parámetro (ByParameterName): En este método se deben
+especificar los nombres de los parámetros. Por ejemplo, considere un archivo
+llamado alias.txt con el siguiente contenido:
+
+Name,Value
+np,notepad
+sel,Select-Object
+go,Invoke-Command
+
+La idea es emplear el contenido de este archivo para introducirlo al comando
+new-alias, y crear los alias listados en el archivo.
+
+Nótese que la primera línea del archivo equivale a los encabezados de columna.
+Si se importa este archivo con import-csv, se obtiene lo siguiente:
+
+PS C:\Users\Usuario\powershell> Import-Csv .\alias.txt
+
+Name Value         
+---- -----         
+np   notepad       
+sel  Select-Object 
+go   Invoke-Command
+
+Si se emplea Get-Member para analizar esta salida, se obtiene:
+
+   TypeName: System.Management.Automation.PSCustomObject
+
+Name        MemberType   Definition                    
+----        ----------   ----------                    
+Equals      Method       bool Equals(System.Object obj)
+GetHashCode Method       int GetHashCode()             
+GetType     Method       type GetType()                
+ToString    Method       string ToString()             
+Name        NoteProperty string Name=np                
+Value       NoteProperty string Value=notepad
+
+Se puede ver que las dos últimas propiedades son tipo String. Analicemos ahora
+los parámetros del comando New-Alias:
+
+New-Alias [-Name] <String> [-Value] <String> [-Confirm] [-Description 
+<String>] [-Force] [-Option {None | ReadOnly | Constant | Private | AllScope | 
+Unspecified}] [-PassThru] [-Scope <String>] [-WhatIf] [<CommonParameters>]
+
+Los parámetros Name y Value reciben entradas tipo String. Y si se revisa la
+ayuda completa, se puede comprobar que ambos parámetros reciben valores por
+el pipeline empleando la modalidad ByParameterValue:
+
+-Name <String>
+        Specifies the new alias. You can use any alphanumeric characters in an 
+        alias, but the first character cannot be a number.
+        
+        Required?                    true
+        Position?                    0
+        Default value                None
+        Accept pipeline input?       True (ByPropertyName)
+        Accept wildcard characters?  false
+
+-Value <String>
+        Specifies the name of the cmdlet or command element that is being aliased.
+        
+        Required?                    true
+        Position?                    1
+        Default value                None
+        Accept pipeline input?       True (ByPropertyName)
+        Accept wildcard characters?  false
+
+Se puede entonces pasar la información de un comando a otro, de la siguiente
+manera:
+
+import-csv alias.txt | new-alias
+
+EJERCICIOS
 
 1. Cree dos archivos de texto similares (con una o dos líneas diferentes).
    Compárelos empleando diff.
