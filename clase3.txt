@@ -1,0 +1,203 @@
+EXPORTACIÓN DE DATOS, PROFUNDIZACIÓN EN EL PIPELINE
+
+EXPORTAR DATOS EN VARIOS FORMATOS
+
+El cmdlet export-CSV permite exportar la salida de una comando hacia un archivo\de texto, en formato separado por comas. Un ejemplo:
+
+get-process | export-csv procesos.csv
+
+Abriendo el archivo resultante con un editor de texto, se puede comprobar que
+cada línea contiene todos los atributos de los procesos, a diferencia del
+listado por pantalla, que solamente muestra un subconjunto predeterminado de
+campos.
+
+El archivo resultante se puede cargar en una herramienta como Excel, en una
+base de datos, o se puede volver a cargar en Powershell para analizarlo como
+una foto (snapshot) del sistema, con el siguiente comando>
+
+import-csv procesos.csv
+
+El cmdlet export-clixml permite exportar la salida de un comando en formato
+XML, que es más completo y fácil de procesar que el formato CSV:
+
+get-process | export-clixml procesos.xml
+
+El comando para importar un archivo grabado por Powershell en formato XML
+es import-clixml. Un ejemplo:
+
+import-clixml procesos.xml
+
+COMPARACIÓN DE OBJETOS
+
+El cmdlet Compare-Object (que tiene el alias diff) permite comparar dos objetos
+y mostrar las diferencias entre ambos. En este sentido, permite comparar un
+snapshot de los procesos (o servicios, o cualquier otra cosa) de un sistema
+con un snapshot más actual.
+
+Por ejemplo, se puede generar un snapshot de los procesos del sistema:
+
+get-process | export-clixml procesos.xml
+
+...y más tarde, comparar con los procesos que haya en ese momento:
+
+diff -Ref (Import-Clixml .\procesos.xml) -Diff (get-process) -Property name
+
+El comando anterior se interpreta de la siguiente manera:
+
+- Los paréntesis se interpretan igual que en álgebra: Los comandos que están
+  entre paréntesis se ejecutan primero, y sus resultados se pasan al comando
+  de más afuera.
+- El parámetro -Ref (-ReferenceObject por extenso) indica el objeto que se va
+  a emplear como base para la comparación (en este caso, el snapshot que se
+  había grabado previamente).
+- El parámetro -Diff (-DifferenceObject por extenso) indica el objeto que se
+  va a comparar contra la base (en este caso, la lista actual de procesos).
+- El parámetro -Property indica la propiedad que se compara, en este caso,
+  los nombres de los procesos
+
+La salida del comando es similar a ésta:
+
+name                                                           SideIndicator
+----                                                           -------------
+WindowsInternal.ComposableShell.Experiences.TextInput.InputApp =>           
+YourPhone                                                      =>           
+LockApp                                                        <=           
+Microsoft.Photos                                               <=           
+notepad                                                        <=           
+
+Aparecen los nombres de los procesos, con una flecha que apunta a izquierda
+o a derecha:
+- Si la flecha apunta a la derecha, indica un nombre que está en el snapshot
+  nuevo, pero no en el original.
+- Si la flecha apunta a la izquierda, indica un nombre que está en el snapshot
+  original, pero no en el nuevo.
+
+SALIDA A ARCHIVO O A IMPRESORA
+
+Si se desea grabar la salida de un comando a un archivo de texto plano sin
+formato, se pueden emplear cualquiera de estas maneras (se toma como ejemplo el comando get-process):
+
+get-process > procesos.txt (estilo redirección)
+get-process | out-file procesos.txt (usando el pipeline)
+
+Las dos versiones son funcionalmente equivalentes, pero el comando out-file
+recibe parámetros para cambiar el ancho de línea, y para evitar la sobre-
+escritura de un archivo existente.
+
+Si se desea enviar la salida de un comando a la impresora, se emplea el cmdlet
+out-printer:
+
+get-process | out-printer
+
+CONVERSIÓN DE LA SALIDA A HTML
+
+La salida de un cmdlet cualquiera puede convertirse a HTML, de la siguiente
+manera (emplenado como ejemplo get-process):
+
+get-process | ConvertTo-HTML
+
+Este comando manda sus resultados a la pantalla. Para crear un archivo HTML,
+se requiere combinarlo con Out-File:
+
+get-process | ConvertTo-HTML | Out-file procesos.html
+
+EMPLEO DEL PIPELINE PARA ENLAZAR COMANDOS QUE GESTIONAN RECURSOS
+
+El pipeline puede emplearse en forma muy poderosa para gestionar recursos
+de la máquina. Por ejemplo, el comando:
+
+get-process | stop-process
+
+... pararía todos los procesos de la máquina si Powershell está corriendo con
+privilegios de administrador (por favor NO ejecute este comando!).
+
+Para simular el efecto de este comando, lo puede correr de la siguiente manera:
+
+get-process | stop-process -whatif
+
+Un mejor ejemplo para un administrador sería buscar un proceso específico y
+detenerlo. El siguiente comando busca todos los procesos llamados "notepad"
+y trata de detenerlos:
+
+get-process -name notepad | stop-process
+
+ORDENANDO Y SELECCIONANDO OBJETOS EMPLEANDO EL PIPELINE
+
+El pipeline se puede emplear para seleccionar propiedades de los objetos que
+no aparecen por omisión cuando se emplea un cmdlet. También se puede emplear
+para filtrar los resultados (empleando criterios de búsqueda).
+
+Para ordenar, se emplea el cmdlet Sort-Object (abreviado sort), y para
+seleccionar propiedades, Select-Object (abreviado select).
+
+Por ejemplo, la lista de procesos normalmente aparece ordenada alfabéticamente
+por nombre de proceso. Para ordenarla por Process ID, se emplea el comando:
+
+get-process | sort id
+
+Para ordenarla por uso de memoria virtual, en orden decreciente:
+
+get-process | sort vm -desc
+
+Debe notarse que en este último ejemplo se está ordenando por un campo que
+no se muestra normalmente en pantalla. Para cambiar los campos que se
+despliegan, se emplea select:
+
+get-process | select -property id,name,vm | sort vm -desc
+
+Este ejemplo muestra una tabla con el identificador, nombre y uso de memoria
+virtual de los procesos de la máquina, ordenada en forma descendente por uso
+de memoria virtual.
+
+Recordar que para ver las propiedades de un objeto (los campos a mostrar)
+se emplea el cmdlet Get-Member (abreviado gm): 
+
+Get-Process | gm
+
+PASO DE PARÁMETROS EN EL PIPELINE
+
+
+
+EJERCICIOS CON EL PIPELINE
+
+1. Cree dos archivos de texto similares (con una o dos líneas diferentes).
+   Compárelos empleando diff.
+2. Qué ocurre si se ejecuta:
+   get-service | export-csv servicios.csv | out-file
+   Por qué?
+3. Cómo haría para crear un archivo delimitado por puntos y comas (;)
+   PISTA: Se emplea export-csv, pero con un parámetro adicional.
+4. Export-cliXML y Export-CSV modifican el sistema, porque pueden crear
+   y sobreescribir archivos. Existe algún parámetro que evite la
+   sobreescritura de un archivo existente? Existe algún parámetro que
+   permita que el comando pregunte antes de sobresscribir un archivo?
+5. Windows emplea configuraciones regionales, lo que incluye el separador de
+   listas. En Windows en inglés, el separador de listas es la coma (,).
+   Cómo se le dice a Export-CSV que emplee el separador del sistema en lugar
+   de la coma?
+6. Identifique un cmdlet que permita generar un número aleatorio.
+7. Identifique un cmdlet que despliegue la fecha y hora actuales.
+8. Qué tipo de objeto produce el cmdlet de la pregunta 7?
+9. Usando el cmdlet de la pregunta 7 y select-object, despliegue solamente
+   el día de la semana, así:
+
+   DayOfWeek
+   ---------
+    Thursday
+
+10. Identifique un cmdlet que muestre información acerca de parches (hotfixes)
+    instalados en el sistema.
+11. Empleando el cmdlet de la pregunta 10, muestre una lista de parches
+    instalados. Luego extienda la expresión para ordenar la lista por fecha
+    de instalación, y muestre en pantalla únicamente la fecha de instalación,
+    el usuario que instaló el parche, y el ID del parche. Recuerde examinar
+    los nombres de las propiedades.
+12. Repita la pregunta 11, pero esta vez ordene los resultados por la
+    descripción del parche, e incluya en el listado la descripción, el ID del
+    parche, y la fecha de instalación. Escriba los resultados a un archivo HTML.
+13. Muestre una lista de las 50 entradas más nuevas del log de eventos System.
+    Ordene la lista de modo que las entradas más viejas aparezcan primero;
+    las entradas producidas al mismo tiempo deben ordenarse por número índice.
+    Muestre el número índice, la hora y la fuente para cada entrada. Escriba
+    esta información en un archivo de texto plano.
+
