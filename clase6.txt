@@ -164,4 +164,50 @@ Powershell incluye los siguientes comandos para manipular variables:
 Con excepción del comando Remove-Variable, todos los demás se ejecutan de forma
 implícita empleando la sintaxis que se ha usado en esta guía.
 
+SOLICITANDO INFORMACIÓN AL USUARIO
+El cmdlet Read-Host despliega un mensaje de solicitud, y luego lee una
+respuesta del usuario. Por ejemplo:
+
+PS> Read-Host "Introduzca un nombre de computador"
+Introduzca un nombre de computador: SERVIDOR
+SERVIDOR
+
+El cmdlet agrega dos puntos (:) después del mensaje de solicitud, y coloca
+la respuesta del usuario en el pipeline. En la mayoría de los casos, la
+respuesta del usuario se captura en una variable, como en el siguiente ejemplo:
+
+PS> $computador = Read-Host "Introduzca un nombre de computador"
+Introduzca un nombre de computador: SERVIDOR
+
+ESCRIBIENDO INFORMACIÓN A LA CONSOLA
+Para escribir datos a la consola, existen dos métodos:
+
+- Write-Host: Permite escribir datos directamente a la consola, saltándose el
+  pipeline. Por esta razón, su salida no puede ser capturada ni redirigida a
+  logs. Se recomienda no usarlo.
+- Write-Output: Permite escribir datos al pipeline. Si no hay redirección a
+  otro comando, los datos saldrán por pantalla. Esta es la manera recomendada
+  de imprimir datos por pantalla.
+
+OTRAS FORMAS DE ESCRIBIR A LA CONSOLA
+Powershell tiene otros cmdlets para producir salida a consola. Ninguna de ellas
+emplea el pipeline (funcionan como Write-Host), pero su salida se puede suprimir
+a voluntad, mediante el uso de variables de entorno. Los comandos son los
+siguientes:
+
+- Write-Warning: Imprime el mensaje en color naranja, precedido por la palabra
+  WARNING. Su impresión depende del valor de la variable $WarningPerference,
+  que por omisión tiene el valor Continue.
+- Write-Verbose: Imprime el mensaje en color azul, precedido por la palabra
+  VERBOSE. Su impresión depende del valor de la variable $VerbosePreference,
+  que por omisión se fija en SilentlyContinue.
+- Write-Debug: Imprime el mensaje en color azul, precedido por la palabra
+  DEBUG. Su impresión depende del valor de la variable $DebugPreference,
+  que por omisión tiene el valor SilentlyContinue.
+- Write-error: Genera un mensaje de error. Su impresión depende del valor de
+  la variable $ErrorActionPreference, que por omisión tiene el valor Continue.
+
+Si la variable correspondiente al comando tiene el valor Continue, el mensaje
+se imprime. Si el valor es SilentlyContinue, se suprime la impresión del
+mensaje.
 
