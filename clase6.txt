@@ -1,0 +1,167 @@
+VARIABLES, ENTRADA Y SALIDA
+
+Powershell permite almacenar valores en variables. Todas los nombres de variable
+comienzan con el signo $, y se componen de letras, números y la raya de
+subrayar (_).
+
+El operador de asignación es el signo igual (=). Algunos ejemplos:
+
+$servidor = "localhost"  (la variable contendrá una cadena de texto)
+$numero = 5              (la variable contendrá un número entero)
+$servicios = Get-Service (la variable contendrá una lista de servicios)
+
+Si se desea consultar el tipo de datos que contiene una variable, se puede
+hacer con el cmdlet Get-Member. Por ejemplo:
+
+PS> $servidor | gm
+
+   TypeName: System.String
+
+Name             MemberType            Definition
+----             ----------            ----------
+Clone            Method                System.Object Clone(), System...
+CompareTo        Method                int CompareTo(System.Object v...
+Contains         Method                bool Contains(string value)
+
+PS> $numero | gm
+
+   TypeName: System.Int32
+
+Name        MemberType Definition
+----        ---------- ----------
+CompareTo   Method     int CompareTo(System.Object value), int Compa...
+Equals      Method     bool Equals(System.Object obj), bool Equals(i...
+GetHashCode Method     int GetHashCode()
+
+Get-Member también despliega las propiedades y métodos de la variable. Por
+ejemplo, las variables tipo System.String poseen el método ToUpper(), que
+convierte el contenido de la variable a mayúsculas:
+
+PS> $servidor.ToUpper()
+LOCALHOST
+
+Las variables pueden emplearse para sustituir cualquier parámetro en la llamada
+a un cmdlet. Teniendo en cuenta el valor de la variable $servidor en esta
+guía, estas dos órdenes son equivalentes:
+
+Get-WmiObject Win32_ComputerSystem -computername localhost
+Get-WmiObject Win32_ComputerSystem -computername $servidor
+
+USO DE LAS COMILLAS EN LA ASIGNACIÓN A VARIABLES
+Las comillas sencillas se emplean para asignar a una variable el texto exacto
+que se ponga entre ellas, por ejemplo:
+
+PS> $var = 'Hola'
+PS> $var = 'El contenido de la variable es $var'
+PS> $var
+El contenido de la variable es $var
+
+Se podría pensar que Powershell desplegaría "El contenido de la variable es
+hola", pero las comillas sencillas hacen que el signo $ no se interprete como
+inicio del nombre de una variable.
+
+Para lograr que Powershell interprete el signo $ como inicio del nombre de una
+variable, se hace la asignación con comillas dobles:
+
+PS> $var = 'Hola'
+PS> $var="La variable contiene $var"
+PS> $var
+La variable contiene Hola
+
+La comilla invertida (`) hace que Powershell ignore el significado del
+siguiente caracter especial, por ejemplo:
+
+PS> $var = 'Hola'
+PS> $var="La variable `$var contiene $var"
+PS> $var
+La variable $var contiene Hola
+
+También puede emplearse para dar significado especial a ciertos caracteres
+(equivale a \ en C y Java, por ejemplo \n, \t...). Un ejemplo de uso es el
+siguiente:
+
+PS> $nombrecompu = 'localhost'
+PS> $frase = "`$nombrecompu`ncontiene`n$nombrecompu"
+PS> $frase
+$nombrecompu
+contiene
+localhost
+
+Como se puede ver, `n simboliza el caracter de retorno de carro.
+
+VARIABLES TIPO LISTA
+
+Es posible crear una variable tipo lista, separando los valores de la lista
+con comas:
+
+PS> $computadores = 'servidor', 'localhost', 'servidor_2'
+PS> $computadores
+servidor
+localhost
+servidor_2
+
+Los elementos de la lista se pueden acceder por número índice. Las listas se
+numeran desde el cero:
+
+PS> $computadores[0]
+servidor
+PS> $computadores.count
+3
+
+A partir de la versión 3 de Powershell, si se pasa una lista como parámetro de
+un cmdlet, Powershell itera sobre los elementos de la lista. Por ejemplo, el
+siguiente comando despliega información sobre los tres computadores que figuran
+en la lista:
+
+get-wmiobject win32_computersystem -comp $computadores
+
+También es posible iterar sobre una lista empleando el cmdlet Foreach-Object.
+Estas dos órdenes hacen lo mismo:
+
+$computadores = $computadores.tolower()
+$computadores = ForEach-Object {$_.tolower()}
+
+DECLARACIÓN DEL TIPO DE UNA VARIABLE
+Hay ocasiones en que se debe asegurar que el tipo de una varaible es el
+correcto para la operación que se desea realizar. Analice el siguiente ejemplo:
+
+PS> $numero = read-host "Introduzca un número"
+Introduzca un número: 1024
+PS> $numero = $numero * 10
+PS> $numero
+1024102410241024102410241024102410241024
+
+El resultado de esta operación no es el esperado, pero esto ocurre porque el
+cmdlet read-host retorna un valor tipo System.String.
+
+Se puede corregir esta situación, forzando a Powershell a hacer la conversión
+del valor digitado a tipo entero:
+
+PS> [int]$numero = read-host "Introduzca un número"
+Introduzca un número: 1024
+PS> $numero = $numero * 10
+PS> $numero
+10240
+
+Los tipos de datos que se pueden emplear son:
+- [int] para enteros,
+- [single] y [double] para números de punto flotante de precisión sencilla
+  y doble,
+- [string] para cadenas,
+- [char] para caracteres,
+- [xml] para un documento XML; el valor es validado como contenido XML.
+
+COMANDOS PARA MANIPULACIÓN DE VARIABLES
+
+Powershell incluye los siguientes comandos para manipular variables:
+
+- New-Variable
+- Set-Variable
+- Remove-Variable
+- Get-Variable
+- Clear-Variable
+
+Con excepción del comando Remove-Variable, todos los demás se ejecutan de forma
+implícita empleando la sintaxis que se ha usado en esta guía.
+
+
