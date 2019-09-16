@@ -119,7 +119,7 @@ También es posible iterar sobre una lista empleando el cmdlet Foreach-Object.
 Estas dos órdenes hacen lo mismo:
 
 $computadores = $computadores.tolower()
-$computadores = ForEach-Object {$_.tolower()}
+$computadores = $computadores | ForEach-Object {$_.tolower()}
 
 DECLARACIÓN DEL TIPO DE UNA VARIABLE
 Hay ocasiones en que se debe asegurar que el tipo de una varaible es el
