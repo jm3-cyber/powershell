@@ -105,10 +105,10 @@ Powershell:
    ejecutando en un computador remoto?
 9. Existe alguna manera de obtener la lista de procesos de un computador
    remoto?
-10.Revise la ayuda del cmdlet Out-File. Cuál es el tamaño de línea que emplea
-   este cmdlet por omisión? Existe algún parámetro que permita cambiar dicho
-   tamaño?
-11.Por omisión, Out-File sobreescribe el archivo de salida, en caso de que
+10. Revise la ayuda del cmdlet **Out-File**. Cuál es el tamaño de línea que
+   emplea este cmdlet por omisión? Existe algún parámetro que permita cambiar
+   dicho tamaño?
+11. Por omisión, **Out-File** sobreescribe el archivo de salida, en caso de que
    exista. Existe algún parámetro que impida la sobreescritura de un archivo
    existente?
 
