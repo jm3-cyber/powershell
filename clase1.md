@@ -31,9 +31,9 @@ ISE (resulta más fácil para aprender).
 Una vez iniciado el ISE, aparecerá el símbolo del sistema, precedido de las
 letras PS, por ejemplo:
 
-> PS C:\Users\Usuario> 
+``PS C:\Users\Usuario>`` 
 
-Se puede verificar la versión digitando el comando **$PSVersionTable**.
+Se puede verificar la versión digitando el comando ``$PSVersionTable``.
 
 ## USO DEL SISTEMA DE AYUDA
 
@@ -55,8 +55,8 @@ Para solicitar ayuda se emplea el comando help. Es útil recordar que los
 comandos de Powershell se componen de un verbo y un sustantivo, separados por
 un guión.
 
-- [x] Algunos verbos comunes son **Get**, **Set**, **Add**, **Remove**, **Invoke**.
-- [x] Algunos sustantivos comunes son **Process**, **Service**, **Item**, **Eventlog**. *SIEMPRE*
+- [x] Algunos verbos comunes son ``Get``, ``Set``, ``Add``, ``Remove``, ``Invoke``.
+- [x] Algunos sustantivos comunes son ``Process``, ``Service``, ``Item``, ``Eventlog``. *SIEMPRE*
   van en singular.
 
 Por ejemplo, para obtener ayuda acerca de comandos relacionados con procesos,
@@ -70,9 +70,9 @@ El comodín (*) indica cero o más caracteres. Ejemplos de su uso:
 
 Comando | Función
 ------- | -------
-help \*process\*  | Muestra ayuda sobre comandos que contienen "process" en cualquier parte del nombre.
-help process\*   | Muestra ayuda de comandos que comienzan con "process".
-help \*process   | Muestra ayuda de comandos que terminan en "process".
+``help \*process\*``  | Muestra ayuda sobre comandos que contienen "process" en cualquier parte del nombre.
+``help process\*``   | Muestra ayuda de comandos que comienzan con "process".
+``help \*process``   | Muestra ayuda de comandos que terminan en "process".
 
 Si hay varios comandos que cumplen el criterio de búsqueda, Powershell muestra
 una lista. Si solamente hay un comando, se muestra la ayuda abreviada.
@@ -81,9 +81,9 @@ Otros ejemplos de uso de la ayuda:
 
 Comando | Función
 ------- | -------
-help get-process           |  Muestra la ayuda abreviada del comando get-process.
-help get-process -full     | Muestra la ayuda completa del comando.
-help get-process -examples | Muestra ejemplos de uso del comando.
+``help get-process``           |  Muestra la ayuda abreviada del comando get-process.
+``help get-process -full``     | Muestra la ayuda completa del comando.
+``help get-process -examples`` | Muestra ejemplos de uso del comando.
 
 ## EJERCICIOS
 
@@ -105,10 +105,10 @@ Powershell:
    ejecutando en un computador remoto?
 9. Existe alguna manera de obtener la lista de procesos de un computador
    remoto?
-10. Revise la ayuda del cmdlet **Out-File**. Cuál es el tamaño de línea que
+10. Revise la ayuda del cmdlet ``Out-File``. Cuál es el tamaño de línea que
    emplea este cmdlet por omisión? Existe algún parámetro que permita cambiar
    dicho tamaño?
-11. Por omisión, **Out-File** sobreescribe el archivo de salida, en caso de que
+11. Por omisión, ``Out-File`` sobreescribe el archivo de salida, en caso de que
    exista. Existe algún parámetro que impida la sobreescritura de un archivo
    existente?
 
