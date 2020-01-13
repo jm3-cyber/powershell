@@ -4,7 +4,7 @@ Powershell es un shell creado por Microsoft, para gestión de diversos
 sistemas operativos (existen versiones para Windows, Linux y MacOS).
 
 Su mayor potencial se explota en Windows. En esta serie de tutoriales
-se asume que el ususario dispone de una máquina Windows para seguir los
+se asume que el usuario dispone de una máquina Windows para seguir los
 ejemplos y ejercicios.
 
 # CÓMO ENCONTRARLO
@@ -12,15 +12,15 @@ ejemplos y ejercicios.
 Digitar **powershell** en la opción de búsqueda de Windows. En máquinas
 Windows de 32 bits, aparecerán dos opciones:
 
-- [x] Powershell: Shell tradicional
-- [x] Powershell ISE: Ejecuta comandos directamente, igual que el shell
+- [x] **Powershell**: Shell tradicional
+- [x] **Powershell ISE**: Ejecuta comandos directamente, igual que el shell
   tradicional, pero también incorpora un editor de scripts y ayuda con la
   sintaxis, por lo que se recomienda para el aprendizaje.
 
 En máquinas de 64 bits, aparecerán 4 opciones:
 
-- [x] Powershell y Powershell ISE: Aplicaciones de 64 bits.
-- [x] Powershell x86 y Pwershell ISE x86: Aplicaciones de 32 bits.
+- [x] **Powershell** y **Powershell ISE**: Aplicaciones de 64 bits.
+- [x] **Powershell x86** y **Powershell ISE x86**: Aplicaciones de 32 bits.
 
 Se recomienda trabajar con la versión nativa para cada versión del sistema
 operativo. En estos tutoriales, se asume que el usuario trabajará con el
@@ -35,16 +35,18 @@ letras PS, por ejemplo:
 
 Se puede verificar la versión digitando el comando **$PSVersionTable**.
 
-USO DEL SISTEMA DE AYUDA
+# USO DEL SISTEMA DE AYUDA
 
 El sistema de ayuda contiene una gran cantidad de información útil para el
-programador. Su buen uso puede ahorrar muchas búsquedas en Internet (especial-
-mente en servidores aislados). 
+programador. Su buen uso puede ahorrar muchas búsquedas en Internet
+(especialmente en servidores aislados). 
 
 Para usar el sistema de ayuda, lo primero que se debe hacer es actualizarlo.
-Para ello, se debe iniciar el ISE como ADMINISTRADOR, y ejecutar el comando:
+Para ello, se debe iniciar el ISE como **ADMINISTRADOR**, y ejecutar el comando:
 
+```powershell
 help-update
+```
 
 Este comando requiere de conexión al Internet. Se recomienda hacer esta
 actualización una vez por mes.
@@ -53,8 +55,8 @@ Para solicitar ayuda se emplea el comando help. Es útil recordar que los
 comandos de Powershell se componen de un verbo y un sustantivo, separados por
 un guión.
 
-- Algunos verbos comunes son Get, Set, Add, Remove, Invoke.
-- Algunos sustantivos comunes son Process, Service, Item, Eventlog. SIEMPRE
+- [x] Algunos verbos comunes son Get, Set, Add, Remove, Invoke.
+- [x] Algunos sustantivos comunes son Process, Service, Item, Eventlog. SIEMPRE
   van en singular.
 
 Por ejemplo, para obtener ayuda acerca de comandos relacionados con procesos,
