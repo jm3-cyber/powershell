@@ -11,21 +11,21 @@ get-alias
 ```
 
 Si se desea consultar si cierto comando tiene alias, se puede hacer mediante
-el mismo comando, con el parámetro **-Definition**. Por ejemplo:
+el mismo comando, con el parámetro ``-Definition``. Por ejemplo:
 
 ```powershell
 get-alias -Definition "Get-Service"
 ```
 
-... mostraría los alias correspondientes al comando **Get-Service**.
+... mostraría los alias correspondientes al comando ``Get-Service``.
 
-Para crear un alias nuevo se emplea el comando **New-Alias**. Por ejemplo:
+Para crear un alias nuevo se emplea el comando ``New-Alias``. Por ejemplo:
 
 ```powershell
 new-alias -Name np -Value Notepad
 ```
 
-... crea un alias llamado **np** para el comando Notepad (bloc de notas).
+... crea un alias llamado ``np`` para el comando Notepad (bloc de notas).
 
 El resto de los comandos para alias se puede consultar con el comando:
 
@@ -61,43 +61,43 @@ y permisos de acceso.
 
 Operación | Comando
 --------- | -------
-Creación        | new-item -itemtype directory -name nombre_directorio
-Borrado         | remove-item -path nombre_directorio
-Renombrado      | rename-item -path nombre_directorio -newname nombre_nuevo
-Mover           | move-item -path nombre_directorio -destination nuevo_sitio
-Ingreso         | cd nombre_directorio
+Creación        | ``new-item -itemtype directory -name nombre_directorio``
+Borrado         | ``remove-item -path nombre_directorio``
+Renombrado      | ``rename-item -path nombre_directorio -newname nombre_nuevo``
+Mover           | ``move-item -path nombre_directorio -destination nuevo_sitio``
+Ingreso         | ``cd nombre_directorio``
 
 Vale la pena recordar que . (punto) indica el directorio actual y .. (punto
 punto) indica el padre del directorio actual.
 
 Para mostrar el directorio de trabajo se puede emplear el comando
-**Get-Location**, que tiene como alias **pwd** (igual que en Linux).
+``Get-Location``, que tiene como alias ``pwd`` (igual que en Linux).
 
 ## GESTIÓN DE ARCHIVOS
 
 Operación | Comando
 --------- | -------
-Creación        | new-item -itemtype file -name nombre_arch [-value contenido]
-Borrado         | remove-item -path nombre_archivo
-Renombrado      | rename-item -path nombre_archivo -newname nombre_nuevo
-Mover           | move-item -path nombre_archivo -destination nuevo-sitio
+Creación        | ``new-item -itemtype file -name nombre_arch [-value contenido]``
+Borrado         | ``remove-item -path nombre_archivo``
+Renombrado      | ``rename-item -path nombre_archivo -newname nombre_nuevo``
+Mover           | ``move-item -path nombre_archivo -destination nuevo-sitio``
 
 Los archivos de texto se pueden mostrar por consola con el comando
-**Get-Content**, que tiene como alias **type**.
+``Get-Content``, que tiene como alias ``type``.
 
 ## PROPIEDADES DE ARCHIVOS Y DIRECTORIOS
 
 Las propiedades de archivos y dirtectorios se pueden examinar con el comando
-**Get-ItemProperty**. Para Powershell los archivos y los directorios
+``Get-ItemProperty``. Para Powershell los archivos y los directorios
 son *OBJETOS*, y sus miembros (propiedades y métodos, entre otros) se pueden
-listar mediante el comando **get-member**, de la siguiente manera:
+listar mediante el comando ``get-member``, de la siguiente manera:
 
 ```powershell
 get-itemproperty -path nombre_arch | get-member
 ```
 
-Algunas propiedades interesantes son: **CreationTime**, **FullName**, 
-**LastAccessTime**, **LastWriteTime**, **Attributes**.
+Algunas propiedades interesantes son: ``CreationTime``, ``FullName``, 
+``LastAccessTime``, ``LastWriteTime``, ``Attributes``.
 
 Por ejemplo, para consultar la fecha de creación de un archivo:
 
@@ -111,13 +111,13 @@ Para consultar los atributos (permisos) del archivo:
 get-itemproperty -path archivo -name Attributes
 ```
 
-Para fijar los atributos se emplea el comando **Set-Itemproperty**, por ejemplo:
+Para fijar los atributos se emplea el comando ``Set-Itemproperty``, por ejemplo:
 
 ```powershell
 set-itemproperty -path archivo -name Attributes -value "ReadOnly"
 ```
 
-Algunos valores de permisos son **ReadOnly**, **Hidden**, **System**. Si se
+Algunos valores de permisos son ``ReadOnly``, ``Hidden``, ``System``. Si se
 desea fijar varios al tiempo, se separan sus nombres con comas,
 y se encierra todo el conjunto entre comillas (como en el ejemplo).
 

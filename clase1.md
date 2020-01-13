@@ -70,9 +70,9 @@ El comodín (*) indica cero o más caracteres. Ejemplos de su uso:
 
 Comando | Función
 ------- | -------
-``help \*process\*``  | Muestra ayuda sobre comandos que contienen "process" en cualquier parte del nombre.
-``help process\*``   | Muestra ayuda de comandos que comienzan con "process".
-``help \*process``   | Muestra ayuda de comandos que terminan en "process".
+``help *process*``  | Muestra ayuda sobre comandos que contienen "process" en cualquier parte del nombre.
+``help process*``   | Muestra ayuda de comandos que comienzan con "process".
+``help *process``   | Muestra ayuda de comandos que terminan en "process".
 
 Si hay varios comandos que cumplen el criterio de búsqueda, Powershell muestra
 una lista. Si solamente hay un comando, se muestra la ayuda abreviada.
