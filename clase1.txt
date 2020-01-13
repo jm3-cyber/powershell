@@ -1,4 +1,4 @@
-WINDOWS POWERSHELL
+# WINDOWS POWERSHELL
 
 Powershell es un shell creado por Microsoft, para gestión de diversos
 sistemas operativos (existen versiones para Windows, Linux y MacOS).
@@ -7,33 +7,33 @@ Su mayor potencial se explota en Windows. En esta serie de tutoriales
 se asume que el ususario dispone de una máquina Windows para seguir los
 ejemplos y ejercicios.
 
-CÓMO ENCONTRARLO
+# CÓMO ENCONTRARLO
 
-Digitar "powershell" en la opción de búsqueda de Windows. En máquinas
+Digitar **powershell** en la opción de búsqueda de Windows. En máquinas
 Windows de 32 bits, aparecerán dos opciones:
 
-- Powershell: Shell tradicional
-- Powershell ISE: Ejecuta comandos directamente, igual que el shell
+- [x] Powershell: Shell tradicional
+- [x] Powershell ISE: Ejecuta comandos directamente, igual que el shell
   tradicional, pero también incorpora un editor de scripts y ayuda con la
   sintaxis, por lo que se recomienda para el aprendizaje.
 
 En máquinas de 64 bits, aparecerán 4 opciones:
 
-- Powershell y Powershell ISE: Aplicaciones de 64 bits.
-- Powershell x86 y Pwershell ISE x86: Aplicaciones de 32 bits.
+- [x] Powershell y Powershell ISE: Aplicaciones de 64 bits.
+- [x] Powershell x86 y Pwershell ISE x86: Aplicaciones de 32 bits.
 
 Se recomienda trabajar con la versión nativa para cada versión del sistema
 operativo. En estos tutoriales, se asume que el usuario trabajará con el
 ISE (resulta más fácil para aprender).
 
-VERIFICACIÓN DE LA VERSIÓN DEL SOFTWARE
+# VERIFICACIÓN DE LA VERSIÓN DEL SOFTWARE
 
 Una vez iniciado el ISE, aparecerá el símbolo del sistema, precedido de las
 letras PS, por ejemplo:
 
-PS C:\Users\Usuario> 
+> PS C:\Users\Usuario> 
 
-Se puede verificar la versión digitando el comando $PSVersionTable.
+Se puede verificar la versión digitando el comando **$PSVersionTable**.
 
 USO DEL SISTEMA DE AYUDA
 
