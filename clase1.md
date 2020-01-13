@@ -55,32 +55,37 @@ Para solicitar ayuda se emplea el comando help. Es útil recordar que los
 comandos de Powershell se componen de un verbo y un sustantivo, separados por
 un guión.
 
-- [x] Algunos verbos comunes son Get, Set, Add, Remove, Invoke.
-- [x] Algunos sustantivos comunes son Process, Service, Item, Eventlog. SIEMPRE
+- [x] Algunos verbos comunes son **Get**, **Set**, **Add**, **Remove**, **Invoke**.
+- [x] Algunos sustantivos comunes son **Process**, **Service**, **Item**, **Eventlog**. *SIEMPRE*
   van en singular.
 
 Por ejemplo, para obtener ayuda acerca de comandos relacionados con procesos,
 se puede emplear el comando:
 
+```powershell
 help *process*
+```
 
 El comodín (*) indica cero o más caracteres. Ejemplos de su uso:
 
-help *process*  Muestra ayuda sobre comandos que contienen "process" en
-                cualquier parte del nombre.
-help process*   Muestra ayuda de comandos que comienzan con "process".
-help *process   Muestra ayuda de comandos que terminan en "process".
+Comando | Función
+------- | -------
+help \*process\*  | Muestra ayuda sobre comandos que contienen "process" en cualquier parte del nombre.
+help process\*   | Muestra ayuda de comandos que comienzan con "process".
+help \*process   | Muestra ayuda de comandos que terminan en "process".
 
 Si hay varios comandos que cumplen el criterio de búsqueda, Powershell muestra
 una lista. Si solamente hay un comando, se muestra la ayuda abreviada.
 
 Otros ejemplos de uso de la ayuda:
 
-help get-process           Muestra la ayuda abreviada del comando get-process.
-help get-process -full     Muestra la ayuda completa del comando.
-help get-process -examples Muestra ejemplos de uso del comando.
+Comando | Función
+------- | -------
+help get-process           |  Muestra la ayuda abreviada del comando get-process.
+help get-process -full     | Muestra la ayuda completa del comando.
+help get-process -examples | Muestra ejemplos de uso del comando.
 
-EJERCICIOS
+# EJERCICIOS
 
 Responda las siguientes preguntas, haciendo uso del sistema de ayuda de
 Powershell:
