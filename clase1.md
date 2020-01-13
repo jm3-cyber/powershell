@@ -7,7 +7,7 @@ Su mayor potencial se explota en Windows. En esta serie de tutoriales
 se asume que el usuario dispone de una máquina Windows para seguir los
 ejemplos y ejercicios.
 
-# CÓMO ENCONTRARLO
+## CÓMO ENCONTRARLO
 
 Digitar **powershell** en la opción de búsqueda de Windows. En máquinas
 Windows de 32 bits, aparecerán dos opciones:
@@ -26,7 +26,7 @@ Se recomienda trabajar con la versión nativa para cada versión del sistema
 operativo. En estos tutoriales, se asume que el usuario trabajará con el
 ISE (resulta más fácil para aprender).
 
-# VERIFICACIÓN DE LA VERSIÓN DEL SOFTWARE
+## VERIFICACIÓN DE LA VERSIÓN DEL SOFTWARE
 
 Una vez iniciado el ISE, aparecerá el símbolo del sistema, precedido de las
 letras PS, por ejemplo:
@@ -35,7 +35,7 @@ letras PS, por ejemplo:
 
 Se puede verificar la versión digitando el comando **$PSVersionTable**.
 
-# USO DEL SISTEMA DE AYUDA
+## USO DEL SISTEMA DE AYUDA
 
 El sistema de ayuda contiene una gran cantidad de información útil para el
 programador. Su buen uso puede ahorrar muchas búsquedas en Internet
@@ -85,7 +85,7 @@ help get-process           |  Muestra la ayuda abreviada del comando get-process
 help get-process -full     | Muestra la ayuda completa del comando.
 help get-process -examples | Muestra ejemplos de uso del comando.
 
-# EJERCICIOS
+## EJERCICIOS
 
 Responda las siguientes preguntas, haciendo uso del sistema de ayuda de
 Powershell:
