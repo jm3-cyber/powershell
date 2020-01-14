@@ -295,7 +295,7 @@ GetType     Method       type GetType()
 ToString    Method       string ToString()             
 Name        NoteProperty string Name=np                
 Value       NoteProperty string Value=notepad
-```console
+```
 
 Se puede ver que las dos últimas propiedades son tipo **String**. Analicemos
 ahora los parámetros del comando ``New-Alias``:
