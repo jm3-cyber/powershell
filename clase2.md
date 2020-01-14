@@ -53,7 +53,7 @@ get-itemproperty
 set-itemproperty
 ```
 
-Los comandos finalizados en "Property" permiten gestionar propiedades de los
+Los comandos finalizados en **Property** permiten gestionar propiedades de los
 archivos y directorios, tales como fechas de creación, acceso y modificación,
 y permisos de acceso.
 
@@ -67,7 +67,7 @@ Renombrado      | ``rename-item -path nombre_directorio -newname nombre_nuevo``
 Mover           | ``move-item -path nombre_directorio -destination nuevo_sitio``
 Ingreso         | ``cd nombre_directorio``
 
-Vale la pena recordar que . (punto) indica el directorio actual y .. (punto
+Vale la pena recordar que ``.`` (punto) indica el directorio actual y ``..`` (punto
 punto) indica el padre del directorio actual.
 
 Para mostrar el directorio de trabajo se puede emplear el comando
@@ -96,7 +96,7 @@ listar mediante el comando ``get-member``, de la siguiente manera:
 get-itemproperty -path nombre_arch | get-member
 ```
 
-Algunas propiedades interesantes son: ``CreationTime``, ``FullName``, 
+Algunas propiedades interesantes son: ``CreationTime``, ``FullName``,
 ``LastAccessTime``, ``LastWriteTime``, ``Attributes``.
 
 Por ejemplo, para consultar la fecha de creación de un archivo:
