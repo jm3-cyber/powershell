@@ -69,17 +69,15 @@ El comando anterior se interpreta de la siguiente manera:
 - [x] El parámetro ``-Property`` indica la propiedad que se compara,
   en este caso, los nombres de los procesos
 
-La salida del comando es similar a ésta:
+La salida del comando es similar a ésta::
 
-``
-name                                                           SideIndicator
-----                                                           -------------
-WindowsInternal.ComposableShell.Experiences.TextInput.InputApp =>           
-YourPhone                                                      =>           
-LockApp                                                        <=           
-Microsoft.Photos                                               <=           
-notepad                                                        <=           
-``
+  name                                                           SideIndicator
+  ----                                                           -------------
+  WindowsInternal.ComposableShell.Experiences.TextInput.InputApp =>           
+  YourPhone                                                      =>           
+  LockApp                                                        <=           
+  Microsoft.Photos                                               <=           
+  notepad                                                        <=           
 
 Aparecen los nombres de los procesos, con una flecha que apunta a izquierda
 o a derecha:
