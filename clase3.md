@@ -16,14 +16,14 @@ campos.
 
 El archivo resultante se puede cargar en una herramienta como Excel, en una
 base de datos, o se puede volver a cargar en Powershell para analizarlo como
-una foto (snapshot) del sistema, con el siguiente comando:
+una instantánea (snapshot) del sistema, con el siguiente comando:
 
 ```powershell
 import-csv procesos.csv
 ```
 
 El cmdlet ``export-clixml`` permite exportar la salida de un comando en formato
-XML, que es más completo y fácil de procesar que el formato CSV:
+XML, que es más completo que el formato CSV:
 
 ```powershell
 get-process | export-clixml procesos.xml
@@ -98,8 +98,8 @@ ejemplo el comando ``get-process``):
 - [x] ``get-process | out-file procesos.txt`` (usando el pipeline)
 
 Las dos versiones son funcionalmente equivalentes, pero el comando ``out-file``
-recibe parámetros para cambiar el ancho de línea, y para evitar la sobre-
-escritura de un archivo existente.
+recibe parámetros para cambiar el ancho de línea, y para evitar la
+sobreescritura de un archivo existente.
 
 Para leer un archivo de texto plano como cadenas de texto, se emplea el cmdlet
 ``Get-Content`` (con alias ``cat`` ó ``type``):
@@ -192,8 +192,8 @@ Este ejemplo muestra una tabla con el identificador, nombre y uso de memoria
 virtual de los procesos de la máquina, ordenada en forma descendente por uso
 de memoria virtual.
 
-Recordar que para ver las propiedades de un objeto (los campos a mostrar)
-se emplea el cmdlet ``Get-Member`` (abreviado ``gm``): 
+Recordar que para ver las propiedades de un objeto (los campos que es
+posible mostrar) se emplea el cmdlet ``Get-Member`` (abreviado ``gm``):
 
 ```powershell
 Get-Process | gm
@@ -222,9 +222,9 @@ ayuda de ``Stop-Process``, se encuentra el siguiente parámetro:
 
 ```console
 -InputObject <Process[]>
-     Specifies the process objects to stop. Enter a variable that contains the 
+     Specifies the process objects to stop. Enter a variable that contains the
      objects, or type a command or expression that gets the objects.
-        
+
      Required?                    true
      Position?                    0
      Default value                None
@@ -255,7 +255,7 @@ El comando se puede ejecutar entonces empleando paréntesis:
 get-service -computername (get-content computadores.txt)
 ```
 
-- [x] Por nombre de parámetro (ByParameterName): En este método se deben
+- [x] Por nombre de parámetro (ByPropertyName): En este método se deben
   especificar los nombres de los parámetros. Por ejemplo, considere un archivo
   llamado ``alias.txt`` con el siguiente contenido:
 
@@ -278,7 +278,7 @@ PS C:\Users\Usuario\powershell> Import-Csv .\alias.txt
 Name Value         
 ---- -----         
 np   notepad       
-sel  Select-Object 
+sel  Select-Object
 go   Invoke-Command
 ```
 
@@ -301,20 +301,20 @@ Se puede ver que las dos últimas propiedades son tipo **String**. Analicemos
 ahora los parámetros del comando ``New-Alias``:
 
 ```console
-New-Alias [-Name] <String> [-Value] <String> [-Confirm] [-Description 
-<String>] [-Force] [-Option {None | ReadOnly | Constant | Private | AllScope | 
+New-Alias [-Name] <String> [-Value] <String> [-Confirm] [-Description
+<String>] [-Force] [-Option {None | ReadOnly | Constant | Private | AllScope |
 Unspecified}] [-PassThru] [-Scope <String>] [-WhatIf] [<CommonParameters>]
 ```
 
 Los parámetros ``Name`` y ``Value`` reciben entradas tipo **String**. Y si se
 revisa la ayuda completa, se puede comprobar que ambos parámetros reciben
-valores por el pipeline empleando la modalidad ByParameterValue:
+valores por el pipeline empleando la modalidad ByPropertyName:
 
 ```console
 -Name <String>
-        Specifies the new alias. You can use any alphanumeric characters in an 
+        Specifies the new alias. You can use any alphanumeric characters in an
         alias, but the first character cannot be a number.
-        
+
         Required?                    true
         Position?                    0
         Default value                None
@@ -323,7 +323,7 @@ valores por el pipeline empleando la modalidad ByParameterValue:
 
 -Value <String>
         Specifies the name of the cmdlet or command element that is being aliased.
-        
+
         Required?                    true
         Position?                    1
         Default value                None
@@ -385,4 +385,3 @@ import-csv alias.txt | new-alias
     las entradas producidas al mismo tiempo deben ordenarse por número índice.
     Muestre el número índice, la hora y la fuente para cada entrada. Escriba
     esta información en un archivo de texto plano.
-
