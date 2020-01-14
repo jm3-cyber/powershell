@@ -118,7 +118,7 @@ get-process | out-printer
 ## CONVERSIÓN DE LA SALIDA A HTML
 
 La salida de un cmdlet cualquiera puede convertirse a HTML, de la siguiente
-manera (emplenado como ejemplo get-process):
+manera (empleando como ejemplo ``get-process``):
 
 ```powershell
 get-process | ConvertTo-HTML
@@ -355,7 +355,7 @@ import-csv alias.txt | new-alias
    permita que el comando pregunte antes de sobresscribir un archivo?
 5. Windows emplea configuraciones regionales, lo que incluye el separador de
    listas. En Windows en inglés, el separador de listas es la coma (,).
-   Cómo se le dice a Export-CSV que emplee el separador del sistema en lugar
+   Cómo se le dice a ``Export-CSV`` que emplee el separador del sistema en lugar
    de la coma?
 6. Identifique un cmdlet que permita generar un número aleatorio.
 7. Identifique un cmdlet que despliegue la fecha y hora actuales.
