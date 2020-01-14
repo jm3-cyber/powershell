@@ -381,7 +381,7 @@ import-csv alias.txt | new-alias
     descripción, el ID del parche, y la fecha de instalación.
     Escriba los resultados a un archivo HTML.
 13. Muestre una lista de las 50 entradas más nuevas del log de eventos System.
-    Ordene la lista de modo que las entradas más viejas aparezcan primero;
+    Ordene la lista de modo que las entradas más antiguas aparezcan primero;
     las entradas producidas al mismo tiempo deben ordenarse por número índice.
     Muestre el número índice, la hora y la fuente para cada entrada. Escriba
     esta información en un archivo de texto plano.
