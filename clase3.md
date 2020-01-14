@@ -363,11 +363,11 @@ import-csv alias.txt | new-alias
 9. Usando el cmdlet de la pregunta 7 y ``select-object``, despliegue solamente
    el día de la semana, así:
 
-``
+```console
    DayOfWeek
    ---------
     Thursday
-``
+```
 
 10. Identifique un cmdlet que muestre información acerca de parches (hotfixes)
     instalados en el sistema.
