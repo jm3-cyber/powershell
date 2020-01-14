@@ -94,8 +94,8 @@ Si se desea grabar la salida de un comando a un archivo de texto plano sin
 formato, se pueden emplear cualquiera de estas maneras (se toma como
 ejemplo el comando ``get-process``):
 
-``get-process > procesos.txt`` (estilo redirección)
-``get-process | out-file procesos.txt`` (usando el pipeline)
+- [x] ``get-process > procesos.txt`` (estilo redirección)
+- [x] ``get-process | out-file procesos.txt`` (usando el pipeline)
 
 Las dos versiones son funcionalmente equivalentes, pero el comando ``out-file``
 recibe parámetros para cambiar el ancho de línea, y para evitar la sobre-
@@ -220,7 +220,7 @@ Get-Process | Stop-Process
 En este caso, ``Get-Process`` produce objetos tipo **Process**. Examinando la
 ayuda de ``Stop-Process``, se encuentra el siguiente parámetro:
 
-``
+```console
 -InputObject <Process[]>
      Specifies the process objects to stop. Enter a variable that contains the 
      objects, or type a command or expression that gets the objects.
@@ -230,7 +230,7 @@ ayuda de ``Stop-Process``, se encuentra el siguiente parámetro:
      Default value                None
      Accept pipeline input?       True (ByValue)
      Accept wildcard characters?  false
-``
+```
 
 Como se ve, este parámetro puede recibir valores del pipeline, empleando el
 método ByValue. Por esta razón, el comando funciona.
@@ -259,12 +259,12 @@ get-service -computername (get-content computadores.txt)
   especificar los nombres de los parámetros. Por ejemplo, considere un archivo
   llamado ``alias.txt`` con el siguiente contenido:
 
-``
+```console
 Name,Value
 np,notepad
 sel,Select-Object
 go,Invoke-Command
-``
+```
 
 La idea es emplear el contenido de este archivo para introducirlo al comando
 ``new-alias``, y crear los alias listados en el archivo.
@@ -272,7 +272,7 @@ La idea es emplear el contenido de este archivo para introducirlo al comando
 Nótese que la primera línea del archivo equivale a los encabezados de columna.
 Si se importa este archivo con ``import-csv``, se obtiene lo siguiente:
 
-``
+```console
 PS C:\Users\Usuario\powershell> Import-Csv .\alias.txt
 
 Name Value         
@@ -280,11 +280,11 @@ Name Value
 np   notepad       
 sel  Select-Object 
 go   Invoke-Command
-``
+```
 
 Si se emplea ``Get-Member`` para analizar esta salida, se obtiene:
 
-``
+```console
    TypeName: System.Management.Automation.PSCustomObject
 
 Name        MemberType   Definition                    
@@ -295,22 +295,22 @@ GetType     Method       type GetType()
 ToString    Method       string ToString()             
 Name        NoteProperty string Name=np                
 Value       NoteProperty string Value=notepad
-``
+```console
 
 Se puede ver que las dos últimas propiedades son tipo **String**. Analicemos
 ahora los parámetros del comando ``New-Alias``:
 
-``
+```console
 New-Alias [-Name] <String> [-Value] <String> [-Confirm] [-Description 
 <String>] [-Force] [-Option {None | ReadOnly | Constant | Private | AllScope | 
 Unspecified}] [-PassThru] [-Scope <String>] [-WhatIf] [<CommonParameters>]
-``
+```
 
 Los parámetros ``Name`` y ``Value`` reciben entradas tipo **String**. Y si se
 revisa la ayuda completa, se puede comprobar que ambos parámetros reciben
 valores por el pipeline empleando la modalidad ByParameterValue:
 
-``
+```console
 -Name <String>
         Specifies the new alias. You can use any alphanumeric characters in an 
         alias, but the first character cannot be a number.
@@ -329,7 +329,7 @@ valores por el pipeline empleando la modalidad ByParameterValue:
         Default value                None
         Accept pipeline input?       True (ByPropertyName)
         Accept wildcard characters?  false
-``
+```
 
 Se puede entonces pasar la información de un comando a otro, de la siguiente
 manera:
