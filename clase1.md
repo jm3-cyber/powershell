@@ -31,7 +31,7 @@ ISE (resulta más fácil para aprender).
 Una vez iniciado el ISE, aparecerá el símbolo del sistema, precedido de las
 letras PS, por ejemplo:
 
-``PS C:\Users\Usuario>`` 
+``PS C:\Users\Usuario>``
 
 Se puede verificar la versión digitando el comando ``$PSVersionTable``.
 
@@ -39,7 +39,7 @@ Se puede verificar la versión digitando el comando ``$PSVersionTable``.
 
 El sistema de ayuda contiene una gran cantidad de información útil para el
 programador. Su buen uso puede ahorrar muchas búsquedas en Internet
-(especialmente en servidores aislados). 
+(especialmente en servidores aislados).
 
 Para usar el sistema de ayuda, lo primero que se debe hacer es actualizarlo.
 Para ello, se debe iniciar el ISE como **ADMINISTRADOR**, y ejecutar el comando:
@@ -51,7 +51,7 @@ help-update
 Este comando requiere de conexión al Internet. Se recomienda hacer esta
 actualización una vez por mes.
 
-Para solicitar ayuda se emplea el comando help. Es útil recordar que los
+Para solicitar ayuda se emplea el comando ``help``. Es útil recordar que los
 comandos de Powershell se componen de un verbo y un sustantivo, separados por
 un guión.
 
@@ -111,4 +111,3 @@ Powershell:
 11. Por omisión, ``Out-File`` sobreescribe el archivo de salida, en caso de que
    exista. Existe algún parámetro que impida la sobreescritura de un archivo
    existente?
-
